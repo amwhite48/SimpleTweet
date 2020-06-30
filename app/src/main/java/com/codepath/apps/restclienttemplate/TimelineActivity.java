@@ -56,7 +56,7 @@ public class TimelineActivity extends AppCompatActivity {
                 Log.i(TAG, "onSuccess " + json.toString());
                 // populate data with list of tweets from JSON response if successful
                 JSONArray jsonArray = json.jsonArray;
-                try { 
+                try {
                     tweets.addAll(Tweet.fromJsonArray(jsonArray));
                     adapter.notifyDataSetChanged();
                 } catch (JSONException e) {
