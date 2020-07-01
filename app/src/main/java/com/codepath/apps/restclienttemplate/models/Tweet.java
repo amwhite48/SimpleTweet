@@ -10,17 +10,23 @@ import androidx.annotation.RequiresApi;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.parceler.Parcel;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
 // class representing a tweet
+@Parcel
 public class Tweet {
 
     public String body;
     public String createdAt;
     public User user;
+
+    // empty constructor for parceler
+    public Tweet() {
+    }
 
     // generates a tweet using a JSONObject
     @RequiresApi(api = Build.VERSION_CODES.N)
