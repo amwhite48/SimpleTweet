@@ -76,6 +76,7 @@ public class Tweet {
             }
         }
 
+        // add character specifying what time unit
         if(shortenedDate.length() == 1) {
             shortenedDate = shortenedDate + relativeDate.substring(2, 3);
         } else {
