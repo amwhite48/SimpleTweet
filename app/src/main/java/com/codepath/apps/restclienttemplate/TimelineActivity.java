@@ -5,6 +5,7 @@ import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.content.Intent;
 import android.os.Build;
@@ -34,6 +35,7 @@ public class TimelineActivity extends AppCompatActivity {
     RecyclerView rvTweets;
     List<Tweet> tweets;
     TweetsAdapter adapter;
+    SwipeRefreshLayout swipeContainer;
 
     TwitterClient client;
     @Override
@@ -43,6 +45,22 @@ public class TimelineActivity extends AppCompatActivity {
 
         // get instance of TwitterClient inside timeline activity to call getHomeTimeline
         client = TwitterApp.getRestClient(this);
+        swipeContainer = findViewById(R.id.swipeContainer);
+
+        // Configure the refreshing colors
+        swipeContainer.setColorSchemeResources(android.R.color.holo_blue_bright,
+                android.R.color.holo_green_light,
+                android.R.color.holo_orange_light,
+                android.R.color.holo_red_light);
+
+        // create listener to tell when screen is refreshed
+        swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                Log.i(TAG, "fetching new tweets");
+                populateHomeTimeline();
+            }
+        });
 
         // find the RecyclerView
         rvTweets = findViewById(R.id.rvTweets);
@@ -73,7 +91,6 @@ public class TimelineActivity extends AppCompatActivity {
             Intent intent = new Intent(this, ComposeActivity.class);
 
             // return to timeline activity after submitting a Tweet
-
             startActivityForResult(intent, REQUEST_CODE );
             // consumes tap of menu item by returning true
             return true;
@@ -109,8 +126,10 @@ public class TimelineActivity extends AppCompatActivity {
                 // populate data with list of tweets from JSON response if successful
                 JSONArray jsonArray = json.jsonArray;
                 try {
-                    tweets.addAll(Tweet.fromJsonArray(jsonArray));
-                    adapter.notifyDataSetChanged();
+                    adapter.clear();
+                    adapter.addAll(Tweet.fromJsonArray(jsonArray));
+                    // signal refresh has finished
+                    swipeContainer.setRefreshing(false);
                 } catch (JSONException e) {
                     // log any issues that might result from using this jsonArray
                     Log.e(TAG, "Json exception", e);
