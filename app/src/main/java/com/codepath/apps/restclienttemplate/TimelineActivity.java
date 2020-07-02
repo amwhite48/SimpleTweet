@@ -134,6 +134,7 @@ public class TimelineActivity extends AppCompatActivity {
                     // signal refresh has finished
                     swipeContainer.setRefreshing(false);
 
+
                 } catch (JSONException e) {
                     // log any issues that might result from using this jsonArray
                     Log.e(TAG, "Json exception", e);
