@@ -23,6 +23,8 @@ public class Tweet {
     public String body;
     public String createdAt;
     public User user;
+    public String mediaURL;
+    public int mediaSize;
 
     // empty constructor for parceler
     public Tweet() {
@@ -36,10 +38,25 @@ public class Tweet {
         tweet.body = jsonObject.getString("text");
         tweet.createdAt = jsonObject.getString("created_at");
         tweet.user = User.fromJson(jsonObject.getJSONObject("user"));
+        // populates media fields if tweet has media
+        if(jsonObject.getJSONObject("entities").has("media")) {
+            tweet.mediaURL = jsonObject.getJSONObject("entities").getJSONArray("media").getJSONObject(0).getString("media_url_https");
+            tweet.mediaSize = jsonObject.getJSONObject("entities").getJSONArray("media").getJSONObject(0).getJSONObject("sizes").getJSONObject("medium").getInt("w");
+        } else {
+            tweet.mediaURL = null;
+            tweet.mediaSize = 0;
+        }
+
 
         tweet.createdAt = getRelativeTimeAgo(tweet.createdAt);
 
         return tweet;
+    }
+
+
+    // tells whether a tweet has media
+    public boolean hasMedia() {
+        return this.mediaSize != 0;
     }
 
     // to obtain a list of tweets from a JSONArray

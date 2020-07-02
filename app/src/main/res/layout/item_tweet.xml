@@ -29,7 +29,7 @@
         android:layout_marginStart="5dp"
         android:layout_marginTop="2dp"
         android:layout_toEndOf="@+id/ivProfilePic"
-        tools:text="you already know what it is!!" />
+        tools:text="i don't know where you're going but do you got room for one more troubled soul i don't know where i'm going but i don't think i'm coming home i'll check in tomorrow if i do  this is the road to ruin and we're starting at the end let's be alone together you already know what it is" />
 
     <TextView
         android:id="@+id/tvTime"
@@ -39,4 +39,16 @@
         android:layout_marginStart="12dp"
         android:layout_toEndOf="@+id/tvUser"
         tools:text="14h" />
+
+    <ImageView
+        android:id="@+id/ivMedia"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tvBody"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="12dp"
+        android:layout_toEndOf="@+id/ivProfilePic"
+        tools:srcCompat="@tools:sample/backgrounds/scenic" />
 </RelativeLayout>
