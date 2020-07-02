@@ -29,6 +29,8 @@
         android:layout_marginStart="5dp"
         android:layout_marginTop="2dp"
         android:layout_toEndOf="@+id/ivProfilePic"
+        android:autoLink="all"
+        android:linksClickable="true"
         tools:text="i don't know where you're going but do you got room for one more troubled soul i don't know where i'm going but i don't think i'm coming home i'll check in tomorrow if i do  this is the road to ruin and we're starting at the end let's be alone together you already know what it is" />
 
     <TextView
