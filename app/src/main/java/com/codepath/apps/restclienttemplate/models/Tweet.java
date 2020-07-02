@@ -4,6 +4,7 @@ import android.icu.text.SimpleDateFormat;
 import android.net.ParseException;
 import android.os.Build;
 import android.text.format.DateUtils;
+import android.util.Log;
 
 import androidx.annotation.RequiresApi;
 
@@ -42,6 +43,7 @@ public class Tweet {
         if(jsonObject.getJSONObject("entities").has("media")) {
             tweet.mediaURL = jsonObject.getJSONObject("entities").getJSONArray("media").getJSONObject(0).getString("media_url_https");
             tweet.mediaSize = jsonObject.getJSONObject("entities").getJSONArray("media").getJSONObject(0).getJSONObject("sizes").getJSONObject("medium").getInt("w");
+
         } else {
             tweet.mediaURL = null;
             tweet.mediaSize = 0;
