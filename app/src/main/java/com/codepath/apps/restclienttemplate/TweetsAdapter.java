@@ -98,8 +98,8 @@ public class TweetsAdapter extends RecyclerView.Adapter<TweetsAdapter.ViewHolder
     }
 
     // Add a list of items -- change to type used
-    public void addAll(List<Tweet> list) {
-        tweets.addAll(list);
+    public void addAll(List<Tweet> newTweets) {
+        tweets.addAll(newTweets);
         notifyDataSetChanged();
     }
 }
